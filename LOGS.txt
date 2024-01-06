@@ -1,0 +1,6 @@
+Build completed: QmW6xrF6ghfghNYVdgcMKtsQwPVApMkV45WKaTCHSZBBii
+
+Deployed to https://thegraph.com/studio/subgraph/mrhelper
+
+Subgraph endpoints:
+Queries (HTTP):     https://api.studio.thegraph.com/query/62444/mrhelper/v0.0.1

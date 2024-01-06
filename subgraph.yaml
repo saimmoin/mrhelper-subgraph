@@ -1,0 +1,55 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: HelperFactory
+    network: mumbai
+    source:
+      address: "0xcBa96A9fb390C84293A8535aa5D829167A155618"
+      abi: HelperFactory
+      startBlock: 44177984
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - FundFulfilled
+        - FundRequested
+        - HelperCreated
+      abis:
+        - name: HelperFactory
+          file: ./abis/HelperFactory.json
+      eventHandlers:
+        - event: FundFulfilled(indexed address,indexed address,indexed address,uint256)
+          handler: handleFundFulfilled
+        - event: FundRequested(indexed address,indexed address,indexed address,uint256)
+          handler: handleFundRequested
+        - event: HelperCreated(indexed address,indexed address)
+          handler: handleHelperCreated
+      file: ./src/helper-factory.ts
+templates:
+  - kind: ethereum
+    name: Helper
+    network: mumbai
+    source:
+      abi: Helper
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Funded
+        - FundingLive
+        - Withdrawn
+      abis:
+        - name: Helper
+          file: ./abis/Helper.json
+      eventHandlers:
+        - event: Funded(address,uint256)
+          handler: handleFunded
+        - event: FundingLive(address,uint256,uint256)
+          handler: handleFundingLive
+        - event: Withdrawn(address,uint256)
+          handler: handleWithdrawn
+      file: ./src/helper.ts
